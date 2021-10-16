@@ -10,8 +10,19 @@
 
 <body class="conteudo exercicio">
     <h1>Estados</h1>
-
+    <button identfy>Mostrar</button>
     <script>
-        // ...
+        const url = 'dados/estados.json'
+
+        const submit = document.querySelector('[identfy]')
+
+        submit.onclick = function() {
+            axios(url).then(resp => {
+                const items = resp.data.reduce(
+                    (html, estado) => html + `<li>${estado.id} ${estado.nome} ${estado.sigla}`, ''
+                )
+                document.body.insertAdjacentHTML("beforeend", `<ul>${items}</ul>`)
+            })
+        }
     </script>
 </body>
