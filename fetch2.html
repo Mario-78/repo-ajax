@@ -10,7 +10,7 @@
             display: flex;
             flex-direction: column;
         }
-
+        
         form input,
         form select,
         form button {
@@ -29,6 +29,32 @@
     </form>
     <div id="resultado"></div>
     <script>
-        // ...
+        document.usuarioForm.onsubmit = async e => {
+            e.preventDefault()
+            const data = new FormData(e.target)
+
+            const options = {
+                method: e.target.method,
+                body: new URLSearchParams(data)
+            }
+
+            const resultado = document.getElementById('resultado')
+                // fetch(e.target.action, options)
+                //     .then(res => res.json())
+                //     .then(json => {
+                //         resultado.innerHTML = JSON.stringify(json)
+                //     })
+                //     .catch(e => {
+                //         resultado.innerHTML = e
+                //     })
+
+            try {
+                const resp = await fetch(e.target.action, options)
+                const json = await resp.json()
+                resultado.innerHTML = JSON.stringify(json)
+            } catch (e) {
+                resultado.innerHTML = e
+            }
+        }
     </script>
 </body>

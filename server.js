@@ -8,6 +8,7 @@ app.use(bodyParser.json())
 
 const multer = require('multer')
 
+
 const storage = multer.diskStorage({
     destination: function(req, file, callback) {
         callback(null, './upload')
@@ -25,6 +26,13 @@ app.post('/upload', (req, res) => {
             return res.end('Ocorreu um erro!')
         }
         res.end('Concluído com sucesso!')
+    })
+})
+
+app.post('/formulario', (req, res) => {
+    res.send({
+        ...req.body,
+        id: 1
     })
 })
 
